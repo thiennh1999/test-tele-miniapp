@@ -1,15 +1,9 @@
 'use client';
 
-import Image from "next/image";
 import AnimatedButton from "@/components/AnimatedButton";
 
 export default function Home() {
   const referenceCode = "F8AGROUP"
-
-  const handleButtonClick = () => {
-    console.log("Button clicked!");
-    alert(`Reference Code: ${referenceCode}`);
-  };
 
   return (
     <div className="flex flex-col items-center justify-center h-screen bg-gradient-to-br from-blue-50 to-purple-50">

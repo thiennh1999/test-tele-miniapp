@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useRef, useEffect } from 'react';
-import Lottie from 'lottie-react';
+import Lottie, { LottieRefCurrentProps } from 'lottie-react';
 import buttonAnimation from '../../public/button-animation.json';
 
 interface AnimatedButtonProps {
@@ -21,7 +21,7 @@ export default function AnimatedButton({
     const [currentPressDuration, setCurrentPressDuration] = useState(0);
     const [pressSeconds, setPressSeconds] = useState(1);
     const pressStartTime = useRef<number | null>(null);
-    const animationRef = useRef<any>(null);
+    const animationRef = useRef<LottieRefCurrentProps | null>(null);
     const animationFrameRef = useRef<number | null>(null);
     const timerRef = useRef<NodeJS.Timeout | null>(null);
 
@@ -164,13 +164,13 @@ export default function AnimatedButton({
         const baseScale = isHovered ? 1.05 : 1;
 
         // Use millisecond-based expansion for precise control
-        const maxDuration = 10000; // 10 seconds in milliseconds
+        const maxDuration = 8000; // 8 seconds in milliseconds
         const expansionRatio = Math.min(currentPressDuration / maxDuration, 1);
         console.log('Expansion ratio:', expansionRatio, 'Duration:', currentPressDuration, 'Max:', maxDuration);
 
-        // Allow expansion up to 10x the original size
-        const pressScale = isPressed ? 1 + (expansionRatio * 9) : 1;
-        const translateY = isPressed ? expansionRatio * 21 : 0;
+        // Allow expansion up to 5x the original size
+        const pressScale = isPressed ? 1 + (expansionRatio * 8) : 1;
+        const translateY = isPressed ? expansionRatio * 2 : 0;
 
         const finalScale = baseScale * pressScale;
         console.log('Transform:', {
@@ -179,8 +179,7 @@ export default function AnimatedButton({
             expansionRatio,
             finalScale,
             pressScale,
-            // pulseScale,
-            // finalPressScale
+
         });
 
         return {
